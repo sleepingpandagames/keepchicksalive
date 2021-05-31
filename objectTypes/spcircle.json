@@ -1,0 +1,90 @@
+{
+	"name": "spCircle",
+	"plugin-id": "Sprite",
+	"sid": 409471859494451,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "initialHeight",
+			"type": "number",
+			"desc": "",
+			"sid": 503043147762893
+		},
+		{
+			"name": "initialWidth",
+			"type": "number",
+			"desc": "",
+			"sid": 790482855380734
+		},
+		{
+			"name": "anim",
+			"type": "string",
+			"desc": "",
+			"sid": 997382816088378
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Tween",
+			"name": "Tween",
+			"sid": 892241688914203
+		},
+		{
+			"behaviorId": "Timer",
+			"name": "Timer",
+			"sid": 568551202688702
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 16,
+						"height": 16,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 1,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 720956526901470,
+				"name": "dark",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 16,
+						"height": 16,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 5,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 341058421509794,
+				"name": "light",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

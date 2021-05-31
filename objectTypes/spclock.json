@@ -1,0 +1,44 @@
+{
+	"name": "spClock",
+	"plugin-id": "Sprite",
+	"sid": 977638641560725,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "gameTime",
+			"type": "number",
+			"desc": "",
+			"sid": 635537391905312
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 8,
+						"height": 8,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "png",
+						"exportQuality": 0.8,
+						"imageSpriteId": 797,
+						"useCollisionPoly": true,
+						"duration": 1
+					}
+				],
+				"sid": 673617881516172,
+				"name": "Default",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

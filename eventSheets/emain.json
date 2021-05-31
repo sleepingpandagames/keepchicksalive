@@ -1,0 +1,2923 @@
+{
+	"name": "eMain",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "gameTries",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 450038655852313
+		},
+		{
+			"eventType": "variable",
+			"name": "gameDuration",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 586789793617846
+		},
+		{
+			"functionName": "restartLevel",
+			"functionDescription": "",
+			"functionCategory": "level",
+			"functionReturnType": "none",
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "stop-all",
+					"objectClass": "Audio",
+					"sid": 521723142330326
+				},
+				{
+					"id": "restart-layout",
+					"objectClass": "System",
+					"sid": 776999608596770
+				}
+			],
+			"sid": 619030660847994,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 233163607891534,
+							"parameters": {
+								"first-value": "LayoutName",
+								"comparison": 1,
+								"second-value": "\"laTheEnd\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "add-to-eventvar",
+							"objectClass": "System",
+							"sid": 886092353248738,
+							"parameters": {
+								"variable": "gameTries",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 139540352206232
+				}
+			]
+		},
+		{
+			"eventType": "comment",
+			"text": "Init Levels"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 933326995187737
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "showTransitionCircle",
+					"sid": 446727636878852,
+					"parameters": [
+						"\"hide\""
+					]
+				}
+			],
+			"sid": 649394367021141
+		},
+		{
+			"eventType": "comment",
+			"text": "Init game"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 330172446016369,
+					"parameters": {
+						"key": 82
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "reset-global-variables",
+					"objectClass": "System",
+					"sid": 554115873370908
+				},
+				{
+					"id": "go-to-layout",
+					"objectClass": "System",
+					"sid": 654069956163033,
+					"parameters": {
+						"layout": "laLevel01"
+					}
+				}
+			],
+			"sid": 711936415235365
+		},
+		{
+			"eventType": "comment",
+			"text": "Helpers"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "tbHelpers",
+					"sid": 156185073257539
+				}
+			],
+			"actions": [
+				{
+					"id": "set-visible",
+					"objectClass": "tbHelpers",
+					"sid": 658522798812932,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				}
+			],
+			"sid": 747912209756132
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "🏃‍♂️ Playable Characters",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-created",
+							"objectClass": "pcs",
+							"sid": 197694174272214
+						}
+					],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "pcs",
+							"sid": 843990385577724,
+							"parameters": {
+								"instance-variable": "controlsEnabled",
+								"value": "0"
+							}
+						}
+					],
+					"sid": 815341387717878
+				},
+				{
+					"eventType": "comment",
+					"text": "Animations"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-on-floor",
+							"objectClass": "pcs",
+							"sid": 836918239449613,
+							"behaviorType": "Platform"
+						},
+						{
+							"id": "is-moving",
+							"objectClass": "pcs",
+							"sid": 767885754233278,
+							"behaviorType": "Platform",
+							"isInverted": true
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 891789973663200
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation",
+							"objectClass": "pcs",
+							"sid": 420647652902948,
+							"parameters": {
+								"animation": "\"idle\"",
+								"from": "beginning"
+							}
+						}
+					],
+					"sid": 161512280431862
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-moving",
+							"objectClass": "pcs",
+							"sid": 488941560874104,
+							"behaviorType": "Platform"
+						},
+						{
+							"id": "is-on-floor",
+							"objectClass": "pcs",
+							"sid": 809606670061677,
+							"behaviorType": "Platform"
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 814513937952669
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation",
+							"objectClass": "pcs",
+							"sid": 852029655123092,
+							"parameters": {
+								"animation": "\"run\"",
+								"from": "beginning"
+							}
+						}
+					],
+					"sid": 625127432976553
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-jumping",
+							"objectClass": "pcs",
+							"sid": 366587596735381,
+							"behaviorType": "Platform"
+						},
+						{
+							"id": "is-on-floor",
+							"objectClass": "pcs",
+							"sid": 355940279329278,
+							"behaviorType": "Platform",
+							"isInverted": true
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 932125008111441
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation",
+							"objectClass": "pcs",
+							"sid": 320179305511852,
+							"parameters": {
+								"animation": "\"jump\"",
+								"from": "beginning"
+							}
+						}
+					],
+					"sid": 219747743155001
+				},
+				{
+					"eventType": "comment",
+					"text": "Controls"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 684739854004327,
+							"parameters": {
+								"key": 39
+							}
+						},
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 374499236991790,
+							"parameters": {
+								"key": 68
+							}
+						}
+					],
+					"actions": [],
+					"sid": 301424211654715,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-mirrored",
+									"objectClass": "pcs",
+									"sid": 578602706742185
+								}
+							],
+							"actions": [
+								{
+									"id": "set-mirrored",
+									"objectClass": "pcs",
+									"sid": 507981216350649,
+									"parameters": {
+										"state": "not-mirrored"
+									}
+								}
+							],
+							"sid": 790443612379730
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "pcs",
+									"sid": 921395616002960,
+									"parameters": {
+										"instance-variable": "controlsEnabled",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "simulate-control",
+									"objectClass": "pcs",
+									"sid": 327533259753995,
+									"behaviorType": "Platform",
+									"parameters": {
+										"control": "right"
+									}
+								}
+							],
+							"sid": 992748878342882
+						}
+					],
+					"isOrBlock": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 375754710568455,
+							"parameters": {
+								"key": 37
+							}
+						},
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 886799947791564,
+							"parameters": {
+								"key": 81
+							}
+						},
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 384056200540315,
+							"parameters": {
+								"key": 65
+							}
+						}
+					],
+					"actions": [],
+					"sid": 523093006132554,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-mirrored",
+									"objectClass": "pcs",
+									"sid": 392775339587447,
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-mirrored",
+									"objectClass": "pcs",
+									"sid": 869863163408722,
+									"parameters": {
+										"state": "mirrored"
+									}
+								}
+							],
+							"sid": 612605046028808
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "pcs",
+									"sid": 720017125035019,
+									"parameters": {
+										"instance-variable": "controlsEnabled",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "simulate-control",
+									"objectClass": "pcs",
+									"sid": 830652440381103,
+									"behaviorType": "Platform",
+									"parameters": {
+										"control": "left"
+									}
+								}
+							],
+							"sid": 914109135483043
+						}
+					],
+					"isOrBlock": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 481037702585265,
+							"parameters": {
+								"key": 38
+							}
+						},
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 127459963346414,
+							"parameters": {
+								"key": 90
+							}
+						},
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 463710927016958,
+							"parameters": {
+								"key": 87
+							}
+						}
+					],
+					"actions": [],
+					"sid": 609342038206950,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "pcs",
+									"sid": 560561850243680,
+									"parameters": {
+										"instance-variable": "controlsEnabled",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "simulate-control",
+									"objectClass": "pcs",
+									"sid": 235883172498949,
+									"behaviorType": "Platform",
+									"parameters": {
+										"control": "jump"
+									}
+								}
+							],
+							"sid": 607543202581072
+						}
+					],
+					"isOrBlock": true
+				}
+			],
+			"sid": 793667636508167
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "🎥 Camera",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Create instance"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-start-of-layout",
+							"objectClass": "System",
+							"sid": 251097289371790
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 842277471419238,
+							"parameters": {
+								"object-to-create": "tbCamera",
+								"layer": "\"Middleground\"",
+								"x": "0",
+								"y": "ViewportHeight(\"Middleground\")*1.5",
+								"create-hierarchy": false
+							}
+						}
+					],
+					"sid": 678544922090294
+				},
+				{
+					"eventType": "comment",
+					"text": "Hide instance"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-created",
+							"objectClass": "tbCamera",
+							"sid": 208617959889872
+						}
+					],
+					"actions": [
+						{
+							"id": "set-visible",
+							"objectClass": "tbCamera",
+							"sid": 687521783117212,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						}
+					],
+					"sid": 900772264002687
+				},
+				{
+					"eventType": "comment",
+					"text": "Move camera"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "every-tick",
+							"objectClass": "System",
+							"sid": 159229518700545
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "pcs",
+							"sid": 317919460499201,
+							"disabled": true,
+							"parameters": {
+								"instance-variable": "controlsEnabled",
+								"comparison": 0,
+								"value": "1"
+							}
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "pcs",
+							"sid": 254620687621977,
+							"parameters": {
+								"instance-variable": "hasCamera",
+								"comparison": 0,
+								"value": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-x",
+							"objectClass": "tbCamera",
+							"sid": 107061013766733,
+							"parameters": {
+								"x": "pcs.X"
+							}
+						}
+					],
+					"sid": 309402565130452
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-collision-with-another-object",
+							"objectClass": "pcs",
+							"sid": 550923241022927,
+							"parameters": {
+								"object": "tbHelperStart"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "tween-two-properties",
+							"objectClass": "tbCamera",
+							"sid": 595234247682746,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"moveCamera\"",
+								"property": "position",
+								"end-x": "tbHelperStart.X + ViewportWidth(\"Middleground\")/2",
+								"end-y": "tbHelperStart.Y",
+								"time": "2",
+								"ease": "easeinoutexpo",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "no"
+							}
+						}
+					],
+					"sid": 275868826236491,
+					"disabled": true
+				}
+			],
+			"sid": 940116680838871
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "🐣 Egg",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Init instance"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-created",
+							"objectClass": "spEgg",
+							"sid": 656610008475183
+						}
+					],
+					"actions": [
+						{
+							"id": "set-mirrored",
+							"objectClass": "spEgg",
+							"sid": 775754017170938,
+							"parameters": {
+								"state": "mirrored"
+							}
+						},
+						{
+							"id": "set-active",
+							"objectClass": "spEgg",
+							"sid": 703740390923099,
+							"behaviorType": "Sine",
+							"parameters": {
+								"state": "inactive"
+							}
+						},
+						{
+							"id": "set-period",
+							"objectClass": "spEgg",
+							"sid": 362487983317570,
+							"behaviorType": "Sine",
+							"parameters": {
+								"period": "0.4"
+							}
+						},
+						{
+							"id": "set-magnitude",
+							"objectClass": "spEgg",
+							"sid": 314562968793217,
+							"behaviorType": "Sine",
+							"parameters": {
+								"magnitude": "1"
+							}
+						},
+						{
+							"id": "set-movement",
+							"objectClass": "spEgg",
+							"sid": 446208070039883,
+							"behaviorType": "Sine",
+							"parameters": {
+								"movement": "horizontal"
+							}
+						}
+					],
+					"sid": 743466349492774,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 787702947776324,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"laTheEnd\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-enabled",
+									"objectClass": "spEgg",
+									"sid": 812909732773444,
+									"behaviorType": "Solid",
+									"parameters": {
+										"state": "enabled"
+									}
+								}
+							],
+							"sid": 703148863876080
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 484249712261275
+								}
+							],
+							"actions": [
+								{
+									"id": "set-enabled",
+									"objectClass": "spEgg",
+									"sid": 836989886272967,
+									"behaviorType": "Solid",
+									"parameters": {
+										"state": "disabled"
+									}
+								}
+							],
+							"sid": 491842545404297
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "Set position egg above pc"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "pcs",
+							"sid": 477870116090841,
+							"parameters": {
+								"instance-variable": "hasEgg",
+								"comparison": 0,
+								"value": "1"
+							}
+						},
+						{
+							"id": "every-tick",
+							"objectClass": "System",
+							"sid": 463448589944443
+						}
+					],
+					"actions": [],
+					"sid": 196097646114564,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-jumping",
+									"objectClass": "pcs",
+									"sid": 408275078188255,
+									"behaviorType": "Platform"
+								}
+							],
+							"actions": [
+								{
+									"id": "set-position",
+									"objectClass": "spEgg",
+									"sid": 201131442906667,
+									"parameters": {
+										"x": "spChar1.X",
+										"y": "spChar1.Y - spChar1.Height"
+									}
+								}
+							],
+							"sid": 174319844896386
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 948559269745146
+								}
+							],
+							"actions": [
+								{
+									"id": "set-position",
+									"objectClass": "spEgg",
+									"sid": 256804168763143,
+									"parameters": {
+										"x": "spChar1.X",
+										"y": "spChar1.Y - spChar1.Height + 1"
+									}
+								}
+							],
+							"sid": 683543221770654
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "On collision"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-collision-with-another-object",
+							"objectClass": "pcs",
+							"sid": 124163031286439,
+							"parameters": {
+								"object": "tbHelperStart"
+							}
+						},
+						{
+							"id": "is-any-playing",
+							"objectClass": "spEgg",
+							"sid": 848888344757195,
+							"behaviorType": "Tween",
+							"isInverted": true
+						}
+					],
+					"actions": [],
+					"sid": 303967431377243,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "Destroy collision instance"
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "tbHelperStart",
+									"sid": 408811635076380
+								}
+							],
+							"sid": 458497064870791
+						},
+						{
+							"eventType": "comment",
+							"text": "Disable controls"
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-instvar-value",
+									"objectClass": "pcs",
+									"sid": 812639719390916,
+									"parameters": {
+										"instance-variable": "controlsEnabled",
+										"value": "0"
+									}
+								}
+							],
+							"sid": 997661080579662
+						},
+						{
+							"eventType": "comment",
+							"text": "Set hud text"
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-visible",
+									"objectClass": "sfTimer",
+									"sid": 416614773076476,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "sfTimer",
+									"sid": 786544871948532,
+									"parameters": {
+										"text": "spClock.gameTime"
+									}
+								}
+							],
+							"sid": 276431721020915
+						},
+						{
+							"eventType": "comment",
+							"text": "Shake egg"
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-active",
+									"objectClass": "spEgg",
+									"sid": 870271515578599,
+									"behaviorType": "Sine",
+									"parameters": {
+										"state": "active"
+									}
+								},
+								{
+									"id": "start-timer",
+									"objectClass": "spEgg",
+									"sid": 868422872531510,
+									"behaviorType": "Timer",
+									"parameters": {
+										"duration": "0.8",
+										"type": "once",
+										"tag": "\"shakeEggH\""
+									}
+								}
+							],
+							"sid": 309497025387826
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-timer",
+							"objectClass": "spEgg",
+							"sid": 133726953496834,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"shakeEggH\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-active",
+							"objectClass": "spEgg",
+							"sid": 452405269149363,
+							"behaviorType": "Sine",
+							"parameters": {
+								"state": "inactive"
+							}
+						},
+						{
+							"id": "set-animation",
+							"objectClass": "spEgg",
+							"sid": 714465222664535,
+							"parameters": {
+								"animation": "\"Dawn\"",
+								"from": "beginning"
+							}
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "spEgg",
+							"sid": 561114429263037,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "1.2",
+								"type": "once",
+								"tag": "\"dawnEgg\""
+							}
+						}
+					],
+					"sid": 889223280449106,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "Start Audio"
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "play",
+									"objectClass": "Audio",
+									"sid": 145992975536498,
+									"parameters": {
+										"audio-file": "zd",
+										"loop": "not-looping",
+										"volume": "0",
+										"tag-optional": "\"mainThemeLoop\""
+									}
+								}
+							],
+							"sid": 327028199495254
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-timer",
+							"objectClass": "spEgg",
+							"sid": 931338739473989,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"dawnEgg\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-movement",
+							"objectClass": "spEgg",
+							"sid": 492155623495059,
+							"behaviorType": "Sine",
+							"parameters": {
+								"movement": "vertical"
+							}
+						},
+						{
+							"id": "set-active",
+							"objectClass": "spEgg",
+							"sid": 840560371109613,
+							"behaviorType": "Sine",
+							"parameters": {
+								"state": "active"
+							}
+						},
+						{
+							"id": "set-animation",
+							"objectClass": "spEgg",
+							"sid": 227066314752954,
+							"disabled": true,
+							"parameters": {
+								"animation": "\"Dawn\"",
+								"from": "beginning"
+							}
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "spEgg",
+							"sid": 276476935269698,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "0.8",
+								"type": "once",
+								"tag": "\"shakeEggV\""
+							}
+						}
+					],
+					"sid": 666080296103913
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-timer",
+							"objectClass": "spEgg",
+							"sid": 606418995144809,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"shakeEggV\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-active",
+							"objectClass": "spEgg",
+							"sid": 905540766021503,
+							"behaviorType": "Sine",
+							"parameters": {
+								"state": "inactive"
+							}
+						},
+						{
+							"id": "set-mirrored",
+							"objectClass": "spEgg",
+							"sid": 267829072098430,
+							"parameters": {
+								"state": "not-mirrored"
+							}
+						}
+					],
+					"sid": 319339648350876,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-mirrored",
+									"objectClass": "pcs",
+									"sid": 866194833174225
+								}
+							],
+							"actions": [
+								{
+									"id": "tween-two-properties",
+									"objectClass": "spEgg",
+									"sid": 193940055164001,
+									"behaviorType": "Tween",
+									"parameters": {
+										"tags": "\"setEggPosition\"",
+										"property": "position",
+										"end-x": "pcs.X-4",
+										"end-y": "pcs.Y-pcs.Height-1",
+										"time": "0.4",
+										"ease": "easeinexpo",
+										"destroy-on-complete": "no",
+										"loop": "no",
+										"ping-pong": "no"
+									}
+								}
+							],
+							"sid": 534338634122776
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 768249915418893
+								}
+							],
+							"actions": [
+								{
+									"id": "tween-two-properties",
+									"objectClass": "spEgg",
+									"sid": 338659342921552,
+									"behaviorType": "Tween",
+									"parameters": {
+										"tags": "\"setEggPosition\"",
+										"property": "position",
+										"end-x": "pcs.X+4",
+										"end-y": "pcs.Y-pcs.Height-1",
+										"time": "0.4",
+										"ease": "easeinexpo",
+										"destroy-on-complete": "no",
+										"loop": "no",
+										"ping-pong": "no"
+									}
+								}
+							],
+							"sid": 762996979306139
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-tweens-finished",
+							"objectClass": "spEgg",
+							"sid": 469220756301328,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"setEggPosition\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-visible",
+							"objectClass": "sfTimer",
+							"sid": 821078438335346,
+							"parameters": {
+								"visibility": "visible"
+							}
+						},
+						{
+							"id": "flash",
+							"objectClass": "sfTimer",
+							"sid": 994735122967711,
+							"behaviorType": "Flash",
+							"parameters": {
+								"on-time": "0.1",
+								"off-time": "0.1",
+								"duration": "0.8"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "pcs",
+							"sid": 949015497091271,
+							"parameters": {
+								"instance-variable": "controlsEnabled",
+								"value": "1"
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 304981777305021,
+							"parameters": {
+								"seconds": "0.4"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "pcs",
+							"sid": 348709936887774,
+							"parameters": {
+								"instance-variable": "hasEgg",
+								"value": "1"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "sfTimer",
+							"sid": 970183640277629,
+							"parameters": {
+								"instance-variable": "triggerTimer",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 275034224583936
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-animation-finished",
+							"objectClass": "spEgg",
+							"sid": 468771043933835,
+							"parameters": {
+								"animation": "\"Dawn\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation",
+							"objectClass": "spEgg",
+							"sid": 533045687025646,
+							"parameters": {
+								"animation": "\"Speak\"",
+								"from": "beginning"
+							}
+						}
+					],
+					"sid": 242315056792621
+				},
+				{
+					"eventType": "comment",
+					"text": "End level"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-collision-with-another-object",
+							"objectClass": "pcs",
+							"sid": 583848036746037,
+							"parameters": {
+								"object": "tbHelperEnd"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 630998206555054,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "Destroy collision instance"
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "tbHelperEnd",
+									"sid": 511176546460236
+								}
+							],
+							"sid": 355322188538838
+						},
+						{
+							"eventType": "comment",
+							"text": "Disable controls"
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-instvar-value",
+									"objectClass": "pcs",
+									"sid": 785131593709552,
+									"parameters": {
+										"instance-variable": "controlsEnabled",
+										"value": "0"
+									}
+								}
+							],
+							"sid": 242449375561859
+						},
+						{
+							"eventType": "comment",
+							"text": "Stop Timer"
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-instvar-value",
+									"objectClass": "sfTimer",
+									"sid": 463930467140809,
+									"parameters": {
+										"instance-variable": "triggerTimer",
+										"value": "0"
+									}
+								},
+								{
+									"id": "set-active",
+									"objectClass": "sfTimer",
+									"sid": 875227866047899,
+									"behaviorType": "Sine",
+									"parameters": {
+										"state": "inactive"
+									}
+								},
+								{
+									"id": "flash",
+									"objectClass": "sfTimer",
+									"sid": 487887617972884,
+									"behaviorType": "Flash",
+									"parameters": {
+										"on-time": "0.1",
+										"off-time": "0.1",
+										"duration": "0.8"
+									}
+								}
+							],
+							"sid": 662269687209226
+						},
+						{
+							"eventType": "comment",
+							"text": "Throw egg"
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 867276512191293,
+									"parameters": {
+										"seconds": "0.2"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "pcs",
+									"sid": 443150363199784,
+									"parameters": {
+										"instance-variable": "hasEgg",
+										"value": "0"
+									}
+								},
+								{
+									"id": "set-active",
+									"objectClass": "spEgg",
+									"sid": 385943011801927,
+									"behaviorType": "Sine",
+									"parameters": {
+										"state": "active"
+									}
+								},
+								{
+									"id": "start-timer",
+									"objectClass": "spEgg",
+									"sid": 202496011253879,
+									"behaviorType": "Timer",
+									"parameters": {
+										"duration": "0.8",
+										"type": "once",
+										"tag": "\"shakeEggVEnd\""
+									}
+								}
+							],
+							"sid": 648303432506350
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-timer",
+							"objectClass": "spEgg",
+							"sid": 765179840488747,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"shakeEggVEnd\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-active",
+							"objectClass": "spEgg",
+							"sid": 666022952541421,
+							"behaviorType": "Sine",
+							"parameters": {
+								"state": "inactive"
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 266153083593699,
+							"parameters": {
+								"seconds": "0.2"
+							}
+						},
+						{
+							"id": "tween-two-properties",
+							"objectClass": "spEgg",
+							"sid": 906261992994579,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"throwEgg\"",
+								"property": "position",
+								"end-x": "pcs.X+8",
+								"end-y": "pcs.Y",
+								"time": "0.4",
+								"ease": "easeinexpo",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "no"
+							}
+						}
+					],
+					"sid": 653998705003616
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-tweens-finished",
+							"objectClass": "spEgg",
+							"sid": 801326300001218,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"throwEgg\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 460061203543408,
+							"parameters": {
+								"seconds": "0.4"
+							}
+						},
+						{
+							"id": "set-active",
+							"objectClass": "spEgg",
+							"sid": 411676854819604,
+							"behaviorType": "Sine",
+							"parameters": {
+								"state": "active"
+							}
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "spEgg",
+							"sid": 397042957519967,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "0.8",
+								"type": "once",
+								"tag": "\"shakeEggVMom\""
+							}
+						}
+					],
+					"sid": 995801425394412
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-timer",
+							"objectClass": "spEgg",
+							"sid": 271414539319044,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"shakeEggVMom\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-active",
+							"objectClass": "spEgg",
+							"sid": 259354075035215,
+							"behaviorType": "Sine",
+							"parameters": {
+								"state": "inactive"
+							}
+						},
+						{
+							"id": "spawn-another-object",
+							"objectClass": "spHen",
+							"sid": 490573139743568,
+							"parameters": {
+								"object": "spHeart",
+								"layer": "Self.LayerName",
+								"image-point": "1",
+								"create-hierarchy": false
+							}
+						}
+					],
+					"sid": 233793367157802
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-created",
+							"objectClass": "spHeart",
+							"sid": 478805683036704
+						}
+					],
+					"actions": [
+						{
+							"id": "tween-one-property",
+							"objectClass": "spHeart",
+							"sid": 685347842878893,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"positionHeart\"",
+								"property": "offsetY",
+								"end-value": "Self.Y - 4",
+								"time": "0.4",
+								"ease": "noease",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "no"
+							}
+						}
+					],
+					"sid": 193977560732514
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-tweens-finished",
+							"objectClass": "spHeart",
+							"sid": 188349000755794,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"positionHeart\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "flash",
+							"objectClass": "spHeart",
+							"sid": 805067586826892,
+							"behaviorType": "Flash",
+							"parameters": {
+								"on-time": "0.1",
+								"off-time": "0.1",
+								"duration": "0.8"
+							}
+						}
+					],
+					"sid": 234712527348815
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-flash-ended",
+							"objectClass": "spHeart",
+							"sid": 142676594294564,
+							"behaviorType": "Flash"
+						}
+					],
+					"actions": [],
+					"sid": 554796648472535,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 725019024638652,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"laTheEnd\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "spHeart",
+									"sid": 918773510399816
+								}
+							],
+							"sid": 326007496271919
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 405940760286918
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "showTransitionCircle",
+									"sid": 101164341808243,
+									"parameters": [
+										"\"show\""
+									]
+								}
+							],
+							"sid": 465690277872162
+						}
+					]
+				}
+			],
+			"sid": 215500635532662
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "☠ Death",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-collision-with-another-object",
+							"objectClass": "pcs",
+							"sid": 389938114386258,
+							"parameters": {
+								"object": "tbDeath"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "restartLevel",
+							"sid": 293156676084222
+						}
+					],
+					"sid": 973139973666482
+				}
+			],
+			"sid": 539213335168243
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "👿Enemies",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-collision-with-another-object",
+							"objectClass": "spChar1",
+							"sid": 894884301277512,
+							"parameters": {
+								"object": "spSpike"
+							}
+						},
+						{
+							"id": "on-collision-with-another-object",
+							"objectClass": "spEgg",
+							"sid": 155903262538800,
+							"parameters": {
+								"object": "spSpike"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "restartLevel",
+							"sid": 860004434068204
+						}
+					],
+					"sid": 372267975274396,
+					"isOrBlock": true
+				}
+			],
+			"sid": 384758161246727
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "🐔Hen",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Make a simple effect like hen is looking at player depending on their X positions"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-x",
+							"objectClass": "pcs",
+							"sid": 908011965501646,
+							"parameters": {
+								"comparison": 2,
+								"x-co-ordinate": "spHen.X"
+							}
+						},
+						{
+							"id": "is-mirrored",
+							"objectClass": "spHen",
+							"sid": 526697258035683,
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-mirrored",
+							"objectClass": "spHen",
+							"sid": 532483410295447,
+							"parameters": {
+								"state": "mirrored"
+							}
+						}
+					],
+					"sid": 760354882233196
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-x",
+							"objectClass": "pcs",
+							"sid": 131598343102112,
+							"parameters": {
+								"comparison": 4,
+								"x-co-ordinate": "spHen.X"
+							}
+						},
+						{
+							"id": "is-mirrored",
+							"objectClass": "spHen",
+							"sid": 813566163875865
+						}
+					],
+					"actions": [
+						{
+							"id": "set-mirrored",
+							"objectClass": "spHen",
+							"sid": 739352333239639,
+							"parameters": {
+								"state": "not-mirrored"
+							}
+						}
+					],
+					"sid": 147903958327474
+				}
+			],
+			"sid": 529488486886237
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "⏱Timer",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Init"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-created",
+							"objectClass": "sfTimer",
+							"sid": 241447270767843
+						}
+					],
+					"actions": [
+						{
+							"id": "flash",
+							"objectClass": "sfTimer",
+							"sid": 643055814792087,
+							"behaviorType": "Flash",
+							"parameters": {
+								"on-time": "0.1",
+								"off-time": "0.1",
+								"duration": "0.8"
+							}
+						},
+						{
+							"id": "set-active",
+							"objectClass": "sfTimer",
+							"sid": 816753750745478,
+							"behaviorType": "Sine",
+							"parameters": {
+								"state": "inactive"
+							}
+						}
+					],
+					"sid": 555101157540540,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 405368524235577,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"laTheEnd\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-text",
+									"objectClass": "sfTimer",
+									"sid": 172594485838017,
+									"parameters": {
+										"text": "\"\""
+									}
+								}
+							],
+							"sid": 623944649481382
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 989103599284514
+								}
+							],
+							"actions": [
+								{
+									"id": "set-text",
+									"objectClass": "sfTimer",
+									"sid": 893407533945393,
+									"parameters": {
+										"text": "lowercase(replace(LayoutName, \"la\", \"\"))"
+									}
+								}
+							],
+							"sid": 297485666408096
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "Shake timer"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "spClock",
+							"sid": 819617570599756,
+							"parameters": {
+								"instance-variable": "gameTime",
+								"comparison": 3,
+								"value": "5"
+							}
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "spClock",
+							"sid": 910440000739103,
+							"parameters": {
+								"instance-variable": "gameTime",
+								"comparison": 4,
+								"value": "3"
+							}
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "sfTimer",
+							"sid": 686792842014800,
+							"parameters": {
+								"instance-variable": "triggerTimer",
+								"comparison": 0,
+								"value": "1"
+							}
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 527780711985498
+						}
+					],
+					"actions": [
+						{
+							"id": "set-movement",
+							"objectClass": "sfTimer",
+							"sid": 919067542505529,
+							"behaviorType": "Sine",
+							"parameters": {
+								"movement": "horizontal"
+							}
+						},
+						{
+							"id": "set-magnitude",
+							"objectClass": "sfTimer",
+							"sid": 868345696553812,
+							"behaviorType": "Sine",
+							"parameters": {
+								"magnitude": "1"
+							}
+						},
+						{
+							"id": "set-period",
+							"objectClass": "sfTimer",
+							"sid": 981682525331148,
+							"behaviorType": "Sine",
+							"parameters": {
+								"period": "0.4"
+							}
+						},
+						{
+							"id": "set-active",
+							"objectClass": "sfTimer",
+							"sid": 102862564482544,
+							"behaviorType": "Sine",
+							"parameters": {
+								"state": "active"
+							}
+						}
+					],
+					"sid": 291603953717480
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "spClock",
+							"sid": 506480588858075,
+							"parameters": {
+								"instance-variable": "gameTime",
+								"comparison": 3,
+								"value": "3"
+							}
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "spClock",
+							"sid": 132497975323975,
+							"parameters": {
+								"instance-variable": "gameTime",
+								"comparison": 4,
+								"value": "0"
+							}
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "sfTimer",
+							"sid": 764093570928934,
+							"parameters": {
+								"instance-variable": "triggerTimer",
+								"comparison": 0,
+								"value": "1"
+							}
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 542932464556231
+						}
+					],
+					"actions": [
+						{
+							"id": "set-period",
+							"objectClass": "sfTimer",
+							"sid": 255436643488100,
+							"behaviorType": "Sine",
+							"parameters": {
+								"period": "0.2"
+							}
+						}
+					],
+					"sid": 206066402392196
+				},
+				{
+					"eventType": "comment",
+					"text": "Stop shake"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "sfTimer",
+							"sid": 133460863750323,
+							"parameters": {
+								"instance-variable": "triggerTimer",
+								"comparison": 0,
+								"value": "0"
+							}
+						},
+						{
+							"id": "is-active",
+							"objectClass": "sfTimer",
+							"sid": 343652073025514,
+							"behaviorType": "Sine"
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 498293126480162
+						}
+					],
+					"actions": [
+						{
+							"id": "set-active",
+							"objectClass": "sfTimer",
+							"sid": 784189914711144,
+							"behaviorType": "Sine",
+							"parameters": {
+								"state": "inactive"
+							}
+						}
+					],
+					"sid": 797326520482667
+				},
+				{
+					"eventType": "comment",
+					"text": "Timer counts"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "sfTimer",
+							"sid": 242221832957436,
+							"parameters": {
+								"instance-variable": "triggerTimer",
+								"comparison": 0,
+								"value": "1"
+							}
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "spClock",
+							"sid": 610066460240856,
+							"parameters": {
+								"instance-variable": "gameTime",
+								"comparison": 4,
+								"value": "0"
+							}
+						},
+						{
+							"id": "every-x-seconds",
+							"objectClass": "System",
+							"sid": 581278938819670,
+							"parameters": {
+								"interval-seconds": "1.0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "subtract-from-instvar",
+							"objectClass": "spClock",
+							"sid": 563392266372343,
+							"parameters": {
+								"instance-variable": "gameTime",
+								"value": "1"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "sfTimer",
+							"sid": 646500116804329,
+							"parameters": {
+								"text": "spClock.gameTime"
+							}
+						}
+					],
+					"sid": 328463289078933
+				},
+				{
+					"eventType": "comment",
+					"text": "Timer ends"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "sfTimer",
+							"sid": 616777195215956,
+							"parameters": {
+								"instance-variable": "triggerTimer",
+								"comparison": 0,
+								"value": "1"
+							}
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "spClock",
+							"sid": 196267181960620,
+							"parameters": {
+								"instance-variable": "gameTime",
+								"comparison": 0,
+								"value": "0"
+							}
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 403788441101605
+						}
+					],
+					"actions": [
+						{
+							"id": "flash",
+							"objectClass": "sfTimer",
+							"sid": 757220722350739,
+							"behaviorType": "Flash",
+							"parameters": {
+								"on-time": "0.1",
+								"off-time": "0.1",
+								"duration": "0.8"
+							}
+						}
+					],
+					"sid": 164877489188927
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-flash-ended",
+							"objectClass": "sfTimer",
+							"sid": 277325927193975,
+							"behaviorType": "Flash"
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "sfTimer",
+							"sid": 237388052952625,
+							"parameters": {
+								"instance-variable": "triggerTimer",
+								"comparison": 0,
+								"value": "1"
+							}
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "spClock",
+							"sid": 953461695176553,
+							"parameters": {
+								"instance-variable": "gameTime",
+								"comparison": 0,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 921269631383838,
+							"parameters": {
+								"seconds": "0.2"
+							}
+						},
+						{
+							"callFunction": "restartLevel",
+							"sid": 216731078164252
+						}
+					],
+					"sid": 419355209418409
+				},
+				{
+					"eventType": "comment",
+					"text": "Timer Background"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-created",
+							"objectClass": "tbTextBg",
+							"sid": 858675114722821
+						}
+					],
+					"actions": [
+						{
+							"id": "move-to-bottom",
+							"objectClass": "tbTextBg",
+							"sid": 448093772908492
+						}
+					],
+					"sid": 936218263443211
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "every-tick",
+							"objectClass": "System",
+							"sid": 683772249163197
+						}
+					],
+					"actions": [
+						{
+							"id": "set-size",
+							"objectClass": "tbTextBg",
+							"sid": 333553907220783,
+							"parameters": {
+								"width": "len(sfTimer.Text)*4 + 1",
+								"height": "sfTimer.Height"
+							}
+						},
+						{
+							"id": "set-position",
+							"objectClass": "tbTextBg",
+							"sid": 821863185861883,
+							"parameters": {
+								"x": "sfTimer.X + sfTimer.Width/2 - Self.Width/2",
+								"y": "sfTimer.Y"
+							}
+						}
+					],
+					"sid": 251493451233936
+				}
+			],
+			"sid": 699013870172850
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "↪ Screen transitions",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"functionName": "showTransitionCircle",
+					"functionDescription": "",
+					"functionCategory": "level",
+					"functionReturnType": "none",
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "anim",
+							"type": "string",
+							"initialValue": "show",
+							"comment": "",
+							"sid": 301079820130035
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 645473416123845,
+							"parameters": {
+								"object-to-create": "spCircle",
+								"layer": "\"HUD\"",
+								"x": "ViewportWidth(\"HUD\")/2",
+								"y": "ViewportHeight(\"HUD\")/2",
+								"create-hierarchy": false
+							}
+						},
+						{
+							"id": "set-animation",
+							"objectClass": "spCircle",
+							"sid": 220457608599248,
+							"parameters": {
+								"animation": "\"dark\"",
+								"from": "beginning"
+							}
+						},
+						{
+							"id": "move-to-top",
+							"objectClass": "spCircle",
+							"sid": 197728505804783
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "spCircle",
+							"sid": 943970061907205,
+							"parameters": {
+								"instance-variable": "anim",
+								"value": "anim"
+							}
+						}
+					],
+					"sid": 562160189881296,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "spCircle",
+									"sid": 612744227690609,
+									"parameters": {
+										"instance-variable": "anim",
+										"comparison": 0,
+										"value": "\"show\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-size",
+									"objectClass": "spCircle",
+									"sid": 377784895030717,
+									"parameters": {
+										"width": "0",
+										"height": "0"
+									}
+								},
+								{
+									"id": "tween-two-properties",
+									"objectClass": "spCircle",
+									"sid": 982975235320370,
+									"behaviorType": "Tween",
+									"parameters": {
+										"tags": "\"showSizeToInitial\"",
+										"property": "size",
+										"end-x": "Self.initialHeight",
+										"end-y": "Self.initialHeight",
+										"time": "0.8",
+										"ease": "easeinoutexpo",
+										"destroy-on-complete": "no",
+										"loop": "no",
+										"ping-pong": "no"
+									}
+								}
+							],
+							"sid": 108665481248211
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "spCircle",
+									"sid": 131263633506063,
+									"parameters": {
+										"instance-variable": "anim",
+										"comparison": 0,
+										"value": "\"hide\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-size",
+									"objectClass": "spCircle",
+									"sid": 216157483047185,
+									"parameters": {
+										"width": "ViewportWidth(Self.LayerName)*4",
+										"height": "ViewportHeight(Self.LayerName)*4"
+									}
+								},
+								{
+									"id": "tween-two-properties",
+									"objectClass": "spCircle",
+									"sid": 786369763175782,
+									"behaviorType": "Tween",
+									"parameters": {
+										"tags": "\"hideSizeToInitial\"",
+										"property": "size",
+										"end-x": "Self.initialWidth",
+										"end-y": "Self.initialHeight",
+										"time": "0.4",
+										"ease": "easeinoutexpo",
+										"destroy-on-complete": "no",
+										"loop": "no",
+										"ping-pong": "no"
+									}
+								}
+							],
+							"sid": 852646168735373
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "🐵 Anim Show"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-tweens-finished",
+							"objectClass": "spCircle",
+							"sid": 202594269499177,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"showSizeToInitial\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "tween-two-properties",
+							"objectClass": "spCircle",
+							"sid": 199336203026550,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"showSizeFullWidth\"",
+								"property": "size",
+								"end-x": "ViewportWidth(Self.LayerName)*4",
+								"end-y": "ViewportHeight(Self.LayerName)*4",
+								"time": "0.8",
+								"ease": "easeinoutexpo",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "no"
+							}
+						}
+					],
+					"sid": 890967909916097
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-tweens-finished",
+							"objectClass": "spCircle",
+							"sid": 487646279131440,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"showSizeFullWidth\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 660759027343017,
+							"parameters": {
+								"seconds": "0.4"
+							}
+						},
+						{
+							"id": "go-to-nextprevious-layout",
+							"objectClass": "System",
+							"sid": 421538659895435,
+							"parameters": {
+								"which": "next"
+							}
+						}
+					],
+					"sid": 968263619343234
+				},
+				{
+					"eventType": "comment",
+					"text": "🙈 Anim Hide"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-tweens-finished",
+							"objectClass": "spCircle",
+							"sid": 634921290624961,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"hideSizeToInitial\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "tween-two-properties",
+							"objectClass": "spCircle",
+							"sid": 667379820294864,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"hideSizeZeroWidth\"",
+								"property": "size",
+								"end-x": "Self.initialWidth-Self.initialWidth",
+								"end-y": "Self.initialHeight-Self.initialHeight",
+								"time": "0.4",
+								"ease": "easeinoutexpo",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "no"
+							}
+						}
+					],
+					"sid": 125988530085299
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-tweens-finished",
+							"objectClass": "spCircle",
+							"sid": 941077398737005,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"hideSizeZeroWidth\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "pcs",
+							"sid": 303797981357219,
+							"parameters": {
+								"instance-variable": "controlsEnabled",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 544086206130830
+				}
+			],
+			"sid": 720637404688281
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "⤵ Platforms",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Init instance"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "spPlatform",
+							"sid": 824861215939084,
+							"parameters": {
+								"instance-variable": "isFalling",
+								"comparison": 0,
+								"value": "1"
+							}
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 573695362315396
+						}
+					],
+					"actions": [
+						{
+							"id": "set-magnitude",
+							"objectClass": "spPlatform",
+							"sid": 865873796563271,
+							"behaviorType": "Sine",
+							"parameters": {
+								"magnitude": "1"
+							}
+						},
+						{
+							"id": "set-period",
+							"objectClass": "spPlatform",
+							"sid": 430202969865348,
+							"behaviorType": "Sine",
+							"parameters": {
+								"period": "0.2"
+							}
+						}
+					],
+					"sid": 141413014324801
+				},
+				{
+					"eventType": "comment",
+					"text": "Once player collisions with it shake it first, then fall"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-collision-with-another-object",
+							"objectClass": "pcs",
+							"sid": 571909221456017,
+							"parameters": {
+								"object": "spPlatform"
+							}
+						},
+						{
+							"id": "is-on-floor",
+							"objectClass": "spPlatform",
+							"sid": 609449547515492,
+							"behaviorType": "Platform",
+							"isInverted": true
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "spPlatform",
+							"sid": 452096301758491,
+							"parameters": {
+								"instance-variable": "isFalling",
+								"comparison": 0,
+								"value": "1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-active",
+							"objectClass": "spPlatform",
+							"sid": 674006617729919,
+							"behaviorType": "Sine",
+							"parameters": {
+								"state": "active"
+							}
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "spPlatform",
+							"sid": 604051574508189,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "0.4",
+								"type": "once",
+								"tag": "\"shakePlatform\""
+							}
+						}
+					],
+					"sid": 841603346880092
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-timer",
+							"objectClass": "spPlatform",
+							"sid": 526272823137868,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"shakePlatform\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-active",
+							"objectClass": "spPlatform",
+							"sid": 365332785080952,
+							"behaviorType": "Sine",
+							"parameters": {
+								"state": "inactive"
+							}
+						},
+						{
+							"id": "set-enabled",
+							"objectClass": "spPlatform",
+							"sid": 834779207894539,
+							"behaviorType": "Platform",
+							"parameters": {
+								"state": "enabled"
+							}
+						}
+					],
+					"sid": 756024292259828
+				}
+			],
+			"sid": 336286062494798
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "End Layout",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Make egg dawn once player jump on eggs"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-collision-with-another-object",
+							"objectClass": "pcs",
+							"sid": 914477664762507,
+							"parameters": {
+								"object": "spEgg"
+							}
+						},
+						{
+							"id": "compare-y",
+							"objectClass": "pcs",
+							"sid": 250649481664283,
+							"parameters": {
+								"comparison": 2,
+								"y-co-ordinate": "spEgg.Y - 4"
+							}
+						},
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 127901850375646,
+							"parameters": {
+								"first-value": "LayoutName",
+								"comparison": 0,
+								"second-value": "\"laTheEnd\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "simulate-control",
+							"objectClass": "pcs",
+							"sid": 957108735409429,
+							"behaviorType": "Platform",
+							"parameters": {
+								"control": "jump"
+							}
+						},
+						{
+							"id": "spawn-another-object",
+							"objectClass": "spHen",
+							"sid": 490121979930882,
+							"parameters": {
+								"object": "spHeart",
+								"layer": "Self.LayerName",
+								"image-point": "1",
+								"create-hierarchy": false
+							}
+						}
+					],
+					"sid": 400942673242033,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-animation-playing",
+									"objectClass": "spEgg",
+									"sid": 518525382022998,
+									"parameters": {
+										"animation": "\"Idle\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "spEgg",
+									"sid": 102958161333205,
+									"parameters": {
+										"animation": "\"Dawn\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 633657045109581
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "Set player score"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-created",
+							"objectClass": "sfParagraph",
+							"sid": 120773816659646
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "sfParagraph",
+							"sid": 286752303789791,
+							"parameters": {
+								"instance-variable": "idName",
+								"comparison": 0,
+								"value": "\"score\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "sfParagraph",
+							"sid": 697839710935466,
+							"parameters": {
+								"text": "gameTries & lowercase(\" death in \") & gameDuration & lowercase(\" sec\")"
+							}
+						}
+					],
+					"sid": 965815300271106
+				},
+				{
+					"eventType": "comment",
+					"text": "Game Duration"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 965647728720615,
+							"parameters": {
+								"first-value": "LayoutName",
+								"comparison": 1,
+								"second-value": "\"laTheEnd\""
+							}
+						},
+						{
+							"id": "every-x-seconds",
+							"objectClass": "System",
+							"sid": 712521655551436,
+							"parameters": {
+								"interval-seconds": "1.0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "add-to-eventvar",
+							"objectClass": "System",
+							"sid": 938698982041355,
+							"parameters": {
+								"variable": "gameDuration",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 256189094473611
+				}
+			],
+			"sid": 251855778237530
+		}
+	],
+	"sid": 241915936883160
+}

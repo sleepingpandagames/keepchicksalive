@@ -1,0 +1,13 @@
+{
+	"name": "tbHelpers",
+	"plugin-id": "TiledBg",
+	"sid": 882968577997425,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"tbHelperEnd",
+		"tbHelperStart",
+		"tbDeath"
+	]
+}

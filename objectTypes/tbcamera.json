@@ -1,0 +1,31 @@
+{
+	"name": "tbCamera",
+	"plugin-id": "TiledBg",
+	"sid": 143820981968790,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "scrollto",
+			"name": "ScrollTo",
+			"sid": 855294504420001
+		},
+		{
+			"behaviorId": "Tween",
+			"name": "Tween",
+			"sid": 748996314903753
+		}
+	],
+	"effectTypes": [],
+	"image": {
+		"width": 8,
+		"height": 8,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 676,
+		"useCollisionPoly": true
+	}
+}

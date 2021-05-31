@@ -1,0 +1,38 @@
+{
+	"name": "sfTimer",
+	"plugin-id": "Spritefont2",
+	"sid": 278112140309368,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "triggerTimer",
+			"type": "number",
+			"desc": "",
+			"sid": 878481161945742
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Flash",
+			"name": "Flash",
+			"sid": 297660800198560
+		},
+		{
+			"behaviorId": "Sin",
+			"name": "Sine",
+			"sid": 376206108581213
+		}
+	],
+	"effectTypes": [],
+	"image": {
+		"width": 80,
+		"height": 80,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 0,
+		"useCollisionPoly": true
+	}
+}

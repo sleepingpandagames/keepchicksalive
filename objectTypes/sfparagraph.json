@@ -1,0 +1,38 @@
+{
+	"name": "sfParagraph",
+	"plugin-id": "Spritefont2",
+	"sid": 568868970259431,
+	"isGlobal": false,
+	"instanceVariables": [
+		{
+			"name": "idName",
+			"type": "string",
+			"desc": "",
+			"sid": 369935810135625
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Flash",
+			"name": "Flash",
+			"sid": 320753640407184
+		},
+		{
+			"behaviorId": "Sin",
+			"name": "Sine",
+			"sid": 493510273405549
+		}
+	],
+	"effectTypes": [],
+	"image": {
+		"width": 80,
+		"height": 80,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "png",
+		"exportQuality": 0.8,
+		"imageSpriteId": 2,
+		"useCollisionPoly": true
+	}
+}

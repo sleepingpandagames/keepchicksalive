@@ -1,0 +1,41 @@
+{
+	"name": "pcs",
+	"plugin-id": "Sprite",
+	"sid": 803918951921815,
+	"instanceVariables": [
+		{
+			"name": "hasEgg",
+			"type": "number",
+			"desc": "",
+			"sid": 514569321688542
+		},
+		{
+			"name": "controlsEnabled",
+			"type": "number",
+			"desc": "",
+			"sid": 943521988186637
+		},
+		{
+			"name": "hasCamera",
+			"type": "number",
+			"desc": "",
+			"sid": 343265757304826
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Platform",
+			"name": "Platform",
+			"sid": 434193529185110
+		},
+		{
+			"behaviorId": "solid",
+			"name": "Solid",
+			"sid": 666508611739780
+		}
+	],
+	"effectTypes": [],
+	"members": [
+		"spChar1"
+	]
+}
